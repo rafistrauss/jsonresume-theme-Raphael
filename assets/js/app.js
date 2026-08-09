@@ -258,6 +258,6 @@
     return true;
   }
 
-  // On first load, honour ?gist=/?url= if present.
+  // On first load, honour ?gist= / ?url= if present.
   loadFromQueryString();
 })();

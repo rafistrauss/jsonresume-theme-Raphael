@@ -33,6 +33,7 @@
     var trimmed = url.trim();
     if (/^https?:\/\//i.test(trimmed)) return trimmed;
     if (/^mailto:/i.test(trimmed)) return trimmed;
+    if (/^tel:/i.test(trimmed)) return trimmed;
     return null;
   }
 
@@ -159,9 +160,7 @@
     if (isNonEmpty(basics.phone)) {
       var phoneLi = el("li", "contact-item");
       var telHref = "tel:" + String(basics.phone).replace(/[^+\d]/g, "");
-      var telAnchor = el("a", "contact-link", basics.phone);
-      telAnchor.href = telHref;
-      phoneLi.appendChild(telAnchor);
+      phoneLi.appendChild(anchor(basics.phone, telHref, "contact-link"));
       contact.appendChild(phoneLi);
     }
     if (isNonEmpty(basics.url)) {
