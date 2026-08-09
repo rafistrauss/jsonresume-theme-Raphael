@@ -23,7 +23,13 @@
     printBtn: document.getElementById("print-btn"),
     status: document.getElementById("status"),
     root: document.getElementById("resume-root"),
-    emptyState: document.getElementById("empty-state")
+    emptyState: document.getElementById("empty-state"),
+    collapseBtn: document.getElementById("collapse-btn"),
+    toolbarBody: document.getElementById("toolbar-body"),
+    toolbar: document.getElementById("toolbar"),
+    sectionToggles: document.getElementById("section-toggles"),
+    sectionTogglesList: document.getElementById("section-toggles-list"),
+    togglesAllBtn: document.getElementById("toggles-all-btn")
   };
 
   /* ------------------------------------------------------------------ */
@@ -114,6 +120,89 @@
   }
 
   /* ------------------------------------------------------------------ */
+  /* Section toggles                                                   */
+  /* ------------------------------------------------------------------ */
+
+  // Map section element IDs to human-readable labels.
+  var SECTION_LABELS = {
+    "section-work": "Experience",
+    "section-education": "Education",
+    "section-projects": "Projects",
+    "section-skills": "Skills",
+    "section-volunteer": "Volunteer",
+    "section-awards": "Awards",
+    "section-certificates": "Certificates",
+    "section-publications": "Publications",
+    "section-languages": "Languages",
+    "section-interests": "Interests",
+    "section-references": "References"
+  };
+
+  function buildSectionToggles() {
+    var list = els.sectionTogglesList;
+    list.innerHTML = "";
+
+    // Top-level section toggles
+    Object.keys(SECTION_LABELS).forEach(function (id) {
+      var sec = document.getElementById(id);
+      if (!sec) return;
+      var label = SECTION_LABELS[id];
+      addTogglePill(list, id + "-toggle", label, true, function (checked) {
+        sec.hidden = !checked;
+      });
+
+      // If this is the work section, also add per-job toggles
+      if (id === "section-work") {
+        var jobs = sec.querySelectorAll("article.entry");
+        if (jobs.length > 1) {
+          jobs.forEach(function (job, idx) {
+            var titleEl = job.querySelector(".entry__title");
+            var subtitleEl = job.querySelector(".entry__subtitle");
+            var jobLabel = (titleEl ? titleEl.textContent.trim() : "") ||
+                           (subtitleEl ? subtitleEl.textContent.trim() : "") ||
+                           ("Job " + (idx + 1));
+            addTogglePill(list, "job-toggle-" + idx, "\u2003" + jobLabel, true, function (checked) {
+              job.hidden = !checked;
+            });
+          });
+        }
+      }
+    });
+
+    // Show/hide the panel based on whether there are any toggles
+    els.sectionToggles.hidden = list.childNodes.length === 0;
+  }
+
+  function addTogglePill(parent, id, label, checked, onChange) {
+    var pill = document.createElement("label");
+    pill.className = "toggle-pill";
+    pill.htmlFor = id;
+
+    var cb = document.createElement("input");
+    cb.type = "checkbox";
+    cb.id = id;
+    cb.checked = checked;
+    cb.addEventListener("change", function () { onChange(cb.checked); });
+
+    pill.appendChild(cb);
+    pill.appendChild(document.createTextNode(label));
+    parent.appendChild(pill);
+    return pill;
+  }
+
+  els.togglesAllBtn.addEventListener("click", function () {
+    var checkboxes = els.sectionTogglesList.querySelectorAll("input[type=checkbox]");
+    var allChecked = Array.prototype.every.call(checkboxes, function (cb) { return cb.checked; });
+    checkboxes.forEach(function (cb) {
+      if (cb.checked !== !allChecked) {
+        cb.checked = !allChecked;
+        cb.dispatchEvent(new Event("change"));
+      }
+    });
+    els.togglesAllBtn.textContent = allChecked ? "Show all" : "Hide all";
+  });
+
+  /* ------------------------------------------------------------------ */
   /* Rendering                                                          */
   /* ------------------------------------------------------------------ */
 
@@ -133,6 +222,12 @@
     var name = resume.basics && resume.basics.name;
     if (name) document.title = name + " \u2014 Resume";
 
+    // Build section visibility toggles now that the DOM is populated.
+    buildSectionToggles();
+
+    // Reset the "Show all / Hide all" toggle label.
+    els.togglesAllBtn.textContent = "Hide all";
+
     // Move keyboard focus to the top of the rendered resume for accessibility.
     els.root.setAttribute("tabindex", "-1");
     els.root.focus({ preventScroll: false });
@@ -141,6 +236,17 @@
   function handleError(err) {
     setStatus(err && err.message ? err.message : String(err), "error");
   }
+
+  /* ------------------------------------------------------------------ */
+  /* Collapsible toolbar                                                */
+  /* ------------------------------------------------------------------ */
+
+  els.collapseBtn.addEventListener("click", function () {
+    var collapsed = els.toolbar.classList.toggle("toolbar--collapsed");
+    els.toolbarBody.hidden = collapsed;
+    els.collapseBtn.setAttribute("aria-expanded", String(!collapsed));
+    els.collapseBtn.title = collapsed ? "Expand toolbar" : "Collapse toolbar";
+  });
 
   /* ------------------------------------------------------------------ */
   /* Event wiring                                                       */
