@@ -186,8 +186,7 @@ a:hover { color: var(--color-accent-dark); }
 /* Header / basics */
 .resume-header {
   margin-bottom: 1.75rem;
-  padding-bottom: 1.25rem;
-  border-bottom: 2px solid var(--color-border);
+  padding-bottom: 0;
 }
 .resume-header__identity { margin-bottom: 0.4rem; }
 
@@ -442,7 +441,7 @@ a:hover { color: var(--color-accent-dark); }
   }
 
   /* Keep the name/contact header on the same page as what follows */
-  .resume-header { break-inside: avoid; page-break-inside: avoid; break-after: avoid; page-break-after: avoid; border-bottom-color: #000; }
+  .resume-header { break-inside: avoid; page-break-inside: avoid; break-after: avoid; page-break-after: avoid; }
 
   a { color: #000; text-decoration: none; }
 
