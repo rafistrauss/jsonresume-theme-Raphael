@@ -431,7 +431,7 @@ a:hover { color: var(--color-accent-dark); }
   }
 
   /* Keep the name/contact header on the same page as what follows */
-  .resume-header { break-inside: avoid; page-break-inside: avoid; }
+  .resume-header { break-inside: avoid; page-break-inside: avoid; break-after: avoid; page-break-after: avoid; }
 
   a { color: #000; text-decoration: none; }
 
