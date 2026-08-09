@@ -1,0 +1,123 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+  "basics": {
+    "name": "Ada Lovelace",
+    "label": "Software Engineer",
+    "email": "ada@example.com",
+    "phone": "+1 (555) 123-4567",
+    "url": "https://example.com",
+    "summary": "Software engineer with 8+ years building reliable, well-tested web platforms. Comfortable across the stack, from API design to accessible front-ends, with a track record of shipping products that scale.",
+    "location": {
+      "city": "London",
+      "region": "England",
+      "countryCode": "GB"
+    },
+    "profiles": [
+      {
+        "network": "GitHub",
+        "username": "adalovelace",
+        "url": "https://github.com/adalovelace"
+      },
+      {
+        "network": "LinkedIn",
+        "username": "adalovelace",
+        "url": "https://www.linkedin.com/in/adalovelace"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "Analytical Engines Ltd.",
+      "position": "Senior Software Engineer",
+      "url": "https://example.com",
+      "location": "London, UK",
+      "startDate": "2021-03",
+      "endDate": "",
+      "summary": "Lead engineer on the data platform team.",
+      "highlights": [
+        "Designed and shipped a streaming ingestion pipeline handling 2M events/minute with 99.99% uptime.",
+        "Mentored four engineers and introduced a code-review checklist that cut production incidents by 30%.",
+        "Reduced cloud spend by 22% by right-sizing services and adding autoscaling."
+      ],
+      "keywords": ["TypeScript", "Node.js", "Kafka", "PostgreSQL", "AWS"]
+    },
+    {
+      "name": "Difference Co.",
+      "position": "Software Engineer",
+      "startDate": "2017-06",
+      "endDate": "2021-02",
+      "summary": "Full-stack engineer on the customer-facing web app.",
+      "highlights": [
+        "Rebuilt the checkout flow, increasing conversion by 12%.",
+        "Added end-to-end test coverage, reducing regressions in release candidates."
+      ],
+      "keywords": ["React", "GraphQL", "Python"]
+    }
+  ],
+  "education": [
+    {
+      "institution": "University of London",
+      "area": "Computer Science",
+      "studyType": "BSc",
+      "startDate": "2013-09",
+      "endDate": "2017-06",
+      "score": "First-class Honours",
+      "courses": ["Algorithms", "Distributed Systems", "Databases"]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Open Notebook",
+      "description": "An open-source, collaborative notebook for reproducible data analysis.",
+      "url": "https://github.com/adalovelace/open-notebook",
+      "startDate": "2020-01",
+      "highlights": [
+        "3k+ GitHub stars and an active contributor community.",
+        "Featured in a popular data-science newsletter."
+      ],
+      "keywords": ["Open Source", "Python", "WebAssembly"]
+    }
+  ],
+  "skills": [
+    {
+      "name": "Languages",
+      "level": "Advanced",
+      "keywords": ["TypeScript", "JavaScript", "Python", "SQL"]
+    },
+    {
+      "name": "Platforms",
+      "level": "Intermediate",
+      "keywords": ["AWS", "Docker", "Kubernetes"]
+    }
+  ],
+  "languages": [
+    { "language": "English", "fluency": "Native speaker" },
+    { "language": "French", "fluency": "Professional working proficiency" }
+  ],
+  "awards": [
+    {
+      "title": "Engineering Excellence Award",
+      "date": "2022-11",
+      "awarder": "Analytical Engines Ltd.",
+      "summary": "Recognised for leadership on the data platform migration."
+    }
+  ],
+  "certificates": [
+    {
+      "name": "AWS Certified Solutions Architect – Associate",
+      "date": "2021-08",
+      "issuer": "Amazon Web Services",
+      "url": "https://www.credly.com"
+    }
+  ],
+  "interests": [
+    { "name": "Mathematics", "keywords": ["Number theory", "Cryptography"] },
+    { "name": "Music", "keywords": ["Piano"] }
+  ],
+  "references": [
+    {
+      "name": "Charles Babbage, CTO at Analytical Engines Ltd.",
+      "reference": "Ada is one of the most rigorous and collaborative engineers I have worked with."
+    }
+  ]
+}

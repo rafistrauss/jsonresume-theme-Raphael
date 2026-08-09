@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JSON Resume Generator</title>
+  <meta name="description" content="Generate a clean, print-friendly and ATS-friendly HTML resume from JSON Resume content. Load directly from a GitHub Gist, URL, file, or by pasting JSON." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <!-- Control panel: hidden when printing -->
+  <header class="toolbar no-print" id="toolbar">
+    <div class="toolbar__inner">
+      <h1 class="toolbar__title">JSON Resume Generator</h1>
+      <form class="toolbar__form" id="source-form" autocomplete="off">
+        <div class="field">
+          <label for="source-input">Gist ID / URL, or raw JSON URL</label>
+          <input
+            type="text"
+            id="source-input"
+            name="source-input"
+            placeholder="e.g. https://gist.github.com/user/abc123 or a Gist ID"
+          />
+        </div>
+        <div class="toolbar__actions">
+          <button type="submit" id="load-btn" class="btn btn--primary">Load resume</button>
+          <button type="button" id="upload-btn" class="btn">Upload file</button>
+          <input type="file" id="file-input" accept=".json,application/json" hidden />
+          <button type="button" id="paste-btn" class="btn">Paste JSON</button>
+          <button type="button" id="sample-btn" class="btn">Load sample</button>
+          <button type="button" id="print-btn" class="btn">Print / Save PDF</button>
+        </div>
+      </form>
+
+      <div class="paste-area" id="paste-area" hidden>
+        <label for="paste-input">Paste JSON Resume content</label>
+        <textarea id="paste-input" rows="8" placeholder='{ "basics": { "name": "..." } }'></textarea>
+        <div class="paste-area__actions">
+          <button type="button" id="paste-render-btn" class="btn btn--primary">Render</button>
+          <button type="button" id="paste-cancel-btn" class="btn">Cancel</button>
+        </div>
+      </div>
+
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+    </div>
+  </header>
+
+  <main id="resume-root" class="resume-root" aria-live="polite">
+    <div class="empty-state no-print" id="empty-state">
+      <h2>Turn JSON Resume content into a polished resume</h2>
+      <p>
+        Paste a <a href="https://jsonresume.org/schema/" target="_blank" rel="noopener">JSON Resume</a>
+        Gist link, a raw JSON URL, upload a file, or paste JSON directly. The result is a clean,
+        print-friendly and ATS-friendly resume you can save as a PDF.
+      </p>
+      <p><button type="button" class="btn btn--primary" id="empty-sample-btn">Try it with a sample</button></p>
+    </div>
+  </main>
+
+  <footer class="site-footer no-print">
+    <p>
+      Built with the open <a href="https://jsonresume.org/schema/" target="_blank" rel="noopener">JSON Resume</a> schema.
+      Your data is processed entirely in your browser and is never uploaded anywhere.
+    </p>
+  </footer>
+
+  <script src="assets/js/render.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
