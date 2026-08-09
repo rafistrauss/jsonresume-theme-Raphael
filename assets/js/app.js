@@ -182,12 +182,18 @@
     cb.type = "checkbox";
     cb.id = id;
     cb.checked = checked;
-    cb.addEventListener("change", function () { onChange(cb.checked); });
+    cb.addEventListener("change", function () { onChange(cb.checked); syncTogglesBtnLabel(); });
 
     pill.appendChild(cb);
     pill.appendChild(document.createTextNode(label));
     parent.appendChild(pill);
     return pill;
+  }
+
+  function syncTogglesBtnLabel() {
+    var checkboxes = els.sectionTogglesList.querySelectorAll("input[type=checkbox]");
+    var allChecked = Array.prototype.every.call(checkboxes, function (cb) { return cb.checked; });
+    els.togglesAllBtn.textContent = allChecked ? "Hide all" : "Show all";
   }
 
   els.togglesAllBtn.addEventListener("click", function () {
@@ -199,7 +205,7 @@
         cb.dispatchEvent(new Event("change"));
       }
     });
-    els.togglesAllBtn.textContent = allChecked ? "Show all" : "Hide all";
+    syncTogglesBtnLabel();
   });
 
   /* ------------------------------------------------------------------ */
@@ -225,8 +231,8 @@
     // Build section visibility toggles now that the DOM is populated.
     buildSectionToggles();
 
-    // Reset the "Show all / Hide all" toggle label.
-    els.togglesAllBtn.textContent = "Hide all";
+    // Sync the bulk-toggle button label to the current state (all visible).
+    syncTogglesBtnLabel();
 
     // Move keyboard focus to the top of the rendered resume for accessibility.
     els.root.setAttribute("tabindex", "-1");
