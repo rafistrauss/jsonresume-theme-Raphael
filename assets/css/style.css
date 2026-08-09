@@ -56,9 +56,24 @@ a:hover { color: var(--color-accent-dark); }
 
 .toolbar__title {
   font-size: 1.15rem;
-  margin: 0 0 0.75rem;
+  margin: 0;
   color: var(--color-text);
 }
+
+.toolbar__heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.toolbar__collapse-btn {
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+.toolbar--collapsed .toolbar__collapse-btn { transform: rotate(180deg); }
 
 .toolbar__form { margin: 0; }
 
@@ -301,6 +316,69 @@ a:hover { color: var(--color-accent-dark); }
 }
 .reference-name { margin: 0.35rem 0 0; font-size: 0.9rem; color: var(--color-faint); }
 
+/* Section visibility toggles */
+.section-toggles {
+  margin-top: 0.85rem;
+  border-top: 1px solid var(--color-border);
+  padding-top: 0.75rem;
+}
+
+.section-toggles__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.section-toggles__label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+.section-toggles__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.toggle-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  background: var(--color-surface);
+  color: var(--color-muted);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+
+.toggle-pill input[type="checkbox"] {
+  width: 0.75rem;
+  height: 0.75rem;
+  accent-color: var(--color-accent);
+  cursor: pointer;
+}
+
+.toggle-pill:has(input:checked) {
+  background: var(--color-tag-bg);
+  border-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+.btn--xs {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.78rem;
+}
+
+/* Hidden resume sections/entries */
+.resume-section[hidden],
+.entry[hidden] { display: none !important; }
+
 /* Site footer */
 .site-footer {
   max-width: 960px;
@@ -329,11 +407,18 @@ a:hover { color: var(--color-accent-dark); }
    -------------------------------------------------------------------------- */
 
 @media print {
-  @page { margin: 0.5in; }
+  @page { margin: 0.5in; size: letter; }
 
-  html, body { background: #fff; color: #000; }
+  html, body { background: #fff; color: #000; margin: 0; padding: 0; }
 
   .no-print { display: none !important; }
+
+  /* Flatten the resume-root wrapper so no extra space is created */
+  .resume-root {
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
 
   .resume-document {
     max-width: none;
@@ -342,7 +427,11 @@ a:hover { color: var(--color-accent-dark); }
     border: none;
     border-radius: 0;
     box-shadow: none;
+    display: block;
   }
+
+  /* Keep the name/contact header on the same page as what follows */
+  .resume-header { break-inside: avoid; page-break-inside: avoid; }
 
   a { color: #000; text-decoration: none; }
 

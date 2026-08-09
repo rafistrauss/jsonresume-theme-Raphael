@@ -11,37 +11,50 @@
   <!-- Control panel: hidden when printing -->
   <header class="toolbar no-print" id="toolbar">
     <div class="toolbar__inner">
-      <h1 class="toolbar__title">JSON Resume Generator</h1>
-      <form class="toolbar__form" id="source-form" autocomplete="off">
-        <div class="field">
-          <label for="source-input">Gist ID / URL, or raw JSON URL</label>
-          <input
-            type="text"
-            id="source-input"
-            name="source-input"
-            placeholder="e.g. https://gist.github.com/user/abc123 or a Gist ID"
-          />
-        </div>
-        <div class="toolbar__actions">
-          <button type="submit" id="load-btn" class="btn btn--primary">Load resume</button>
-          <button type="button" id="upload-btn" class="btn">Upload file</button>
-          <input type="file" id="file-input" accept=".json,application/json" hidden />
-          <button type="button" id="paste-btn" class="btn">Paste JSON</button>
-          <button type="button" id="sample-btn" class="btn">Load sample</button>
-          <button type="button" id="print-btn" class="btn">Print / Save PDF</button>
-        </div>
-      </form>
-
-      <div class="paste-area" id="paste-area" hidden>
-        <label for="paste-input">Paste JSON Resume content</label>
-        <textarea id="paste-input" rows="8" placeholder='{ "basics": { "name": "..." } }'></textarea>
-        <div class="paste-area__actions">
-          <button type="button" id="paste-render-btn" class="btn btn--primary">Render</button>
-          <button type="button" id="paste-cancel-btn" class="btn">Cancel</button>
-        </div>
+      <div class="toolbar__heading">
+        <h1 class="toolbar__title">JSON Resume Generator</h1>
+        <button type="button" id="collapse-btn" class="btn toolbar__collapse-btn" aria-expanded="true" aria-controls="toolbar-body" title="Collapse toolbar">&#9650;</button>
       </div>
+      <div id="toolbar-body">
+        <form class="toolbar__form" id="source-form" autocomplete="off">
+          <div class="field">
+            <label for="source-input">Gist ID / URL, or raw JSON URL</label>
+            <input
+              type="text"
+              id="source-input"
+              name="source-input"
+              placeholder="e.g. https://gist.github.com/user/abc123 or a Gist ID"
+            />
+          </div>
+          <div class="toolbar__actions">
+            <button type="submit" id="load-btn" class="btn btn--primary">Load resume</button>
+            <button type="button" id="upload-btn" class="btn">Upload file</button>
+            <input type="file" id="file-input" accept=".json,application/json" hidden />
+            <button type="button" id="paste-btn" class="btn">Paste JSON</button>
+            <button type="button" id="sample-btn" class="btn">Load sample</button>
+            <button type="button" id="print-btn" class="btn">Print / Save PDF</button>
+          </div>
+        </form>
 
-      <p class="status" id="status" role="status" aria-live="polite"></p>
+        <div class="paste-area" id="paste-area" hidden>
+          <label for="paste-input">Paste JSON Resume content</label>
+          <textarea id="paste-input" rows="8" placeholder='{ "basics": { "name": "..." } }'></textarea>
+          <div class="paste-area__actions">
+            <button type="button" id="paste-render-btn" class="btn btn--primary">Render</button>
+            <button type="button" id="paste-cancel-btn" class="btn">Cancel</button>
+          </div>
+        </div>
+
+        <div class="section-toggles" id="section-toggles" hidden>
+          <div class="section-toggles__header">
+            <span class="section-toggles__label">Visible sections</span>
+            <button type="button" id="toggles-all-btn" class="btn btn--xs">Show all</button>
+          </div>
+          <div class="section-toggles__list" id="section-toggles-list"></div>
+        </div>
+
+        <p class="status" id="status" role="status" aria-live="polite"></p>
+      </div>
     </div>
   </header>
 
